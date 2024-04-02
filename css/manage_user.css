@@ -1,0 +1,50 @@
+
+
+ /* Styling for the form */
+ .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form label {
+    margin-bottom: 10px;
+}
+
+.form input, .form select, .form textarea {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form button.delete {
+    background-color: #ff6961;
+    color: #fff;
+}
+
+.form button.edit {
+    background-color: #4682b4;
+    color: #fff;
+}
+
+.form button.update {
+    background-color: #32cd32;
+    color: #fff;
+}
