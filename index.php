@@ -1,6 +1,6 @@
 <?php
 // Establish database connection
-include('./database/db.php');
+include ('./database/db.php');
 ?>
 
 <!DOCTYPE html>
@@ -141,13 +141,24 @@ include('./database/db.php');
                     <label>Birthday:</label>
                     <input type="date" name="birthday" required>
                 </div>
-                <br><br>
 
                 <div>
                     <label>Gender:</label>
-                    <input type="radio" name="gender" value="Male" required>Male
-                    <input type="radio" name="gender" value="Female" required>Female
-                    <input type="radio" name="gender" value="Other" required>Other<br><br>
+                    <div class="inpute-radio">
+                        <div class="radio-input">
+                            <label for="male">Male</label>
+                            <input id="male" type="radio" name="gender" value="Male" required>
+                        </div>
+                        <div class="radio-input">
+                            <label for="female">Female</label>
+                            <input id="female" type="radio" name="gender" value="Female" required>
+
+                        </div>
+                        <div class="radio-input">
+                            <label for="other">Other</label>
+                            <input id="other" type="radio" name="gender" value="Other" required>
+                        </div>
+                    </div>
                 </div>
             </div>
             <br><br>
@@ -193,7 +204,6 @@ include('./database/db.php');
                         <option value="Puducherry">Puducherry</option>
                     </select>
                 </div>
-                <br><br>
 
                 <div class="state-city">
                     <label for="city">City:</label>
@@ -209,11 +219,14 @@ include('./database/db.php');
             <div id="education_fields">
                 <label>Education :</label>
                 <div class="div2">
-                    <div> <input type="text" name="education[]" placeholder="Education" required>
+                    <div> 
+                        <input type="text" name="education[]" placeholder="Education" required>
                     </div>
-                    <div><input type="text" name="year_of_completion[]" placeholder="Year of Completion" required></div>
-                    <button type="button" onclick="addEducationField()">Add More</button>
-                </div>
+                    <div>
+                        <input type="text" name="year_of_completion[]" placeholder="Year of Completion" required>
+                    </div>
+                    
+                </div><button class="global-btn" type="button" onclick="addEducationField()">Add More</button>
             </div><br>
 
             <label>Profile Photo:</label>
@@ -228,10 +241,21 @@ include('./database/db.php');
             <input type="file" name="certificates[]" multiple="multiple" required><br><br>
 
             <label>Profession:</label><br>
-            <input type="radio" name="profession" value="Salaried" required onclick="showHideFields()">Salaried
-            <input type="radio" name="profession" value="Self-employed" required
-                onclick="showHideFields()">Self-employed<br><br>
 
+
+
+            <div class="inpute-radio">
+                <div class="radio-input">
+                    <label for="salaried">Male</label>
+                    <input id="salaried" type="radio" name="profession" value="Salaried" required onclick="showHideFields()">
+                </div>
+                <div class="radio-input">
+                    <label for="self-employee">Female</label>
+                    <input id="self-employee" type="radio" name="profession" value="Self-employed" required onclick="showHideFields()">
+                </div>
+
+            </div>
+            <br><br>
             <div id="salaried_fields" style="display: none;">
                 <label>Company Name:</label>
                 <input type="text" name="company_name"><br><br>
@@ -259,7 +283,6 @@ include('./database/db.php');
                     <label>Email ID:</label>
                     <input type="email" name="email" required>
                 </div>
-                <br><br>
                 <div class="state-city">
                     <label>Mobile No:</label>
                     <input type="text" name="mobile" required>
