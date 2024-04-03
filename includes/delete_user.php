@@ -1,6 +1,6 @@
 <?php
 // Include database connection or necessary files
-include('./database/db.php');
+include('../database/db.php');
 
 // Check if ID is provided
 if (isset($_POST['id'])) {
@@ -9,7 +9,7 @@ if (isset($_POST['id'])) {
     
     try {
         // Prepare SQL statement to delete user
-        $stmt = $conn->prepare("DELETE FROM Users WHERE ID = :id");
+        $stmt = $connection->prepare("DELETE FROM Users WHERE id = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
 
@@ -17,10 +17,10 @@ if (isset($_POST['id'])) {
         echo 'success';
     } catch (PDOException $e) {
         // Handle database errors
-        echo 'error';
+        echo 'error delete';
     }
 } else {
     // Send error response if ID is not provided
-    echo 'error';
+    echo 'error dd';
 }
 ?>

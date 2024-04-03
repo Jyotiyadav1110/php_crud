@@ -26,7 +26,7 @@ $certificateFilePath = ""; // Placeholder for now, you'll handle file upload sep
 
 try {
 // Prepare SQL statement to insert data into Users table
-$stmt = $conn->prepare("INSERT INTO Users (Name, Birthday, Gender, State, City, ProfilePhoto, Profession, CompanyName, JobStartedFrom, BusinessName, Location, Email, Mobile, Education, YearOfCompletion, Skills, CertificateFilePath) VALUES (:name, :birthday, :gender, :state, :city, :profilePhoto, :profession, :companyName, :jobStartedFrom, :businessName, :location, :email, :mobile, :education, :yearOfCompletion, :skills, :certificateFilePath)");
+$stmt = $connection->prepare("INSERT INTO Users (Name, Birthday, Gender, State, City, ProfilePhoto, Profession, CompanyName, JobStartedFrom, BusinessName, Location, Email, Mobile, Education, YearOfCompletion, Skills, CertificateFilePath) VALUES (:name, :birthday, :gender, :state, :city, :profilePhoto, :profession, :companyName, :jobStartedFrom, :businessName, :location, :email, :mobile, :education, :yearOfCompletion, :skills, :certificateFilePath)");
 
 // Bind parameters
 $stmt->bindParam(':name', $name);

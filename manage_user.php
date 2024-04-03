@@ -3,7 +3,7 @@
 include ('./database/db.php');
 
 // Retrieve all user data from the database
-$stmt = $conn->prepare("SELECT * FROM Users");
+$stmt = $connection->prepare("SELECT * FROM Users");
 $stmt->execute();
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -16,106 +16,223 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Management</title>
     <link rel="stylesheet" href="./css/manage_user.css">
+
+    <style>
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form label {
+        margin-bottom: 10px;
+    }
+
+    .form input,
+    .form select,
+    .form textarea {
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .form button {
+        padding: 10px 20px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .form button.delete {
+        background-color: #ff6961;
+        color: #fff;
+    }
+
+    .form button.edit {
+        background-color: #4682b4;
+        color: #fff;
+    }
+
+    .form button.update {
+        background-color: #32cd32;
+        color: #fff;
+    }
+
+    .user-details-container {
+        width: 80%;
+        display: grid;
+        grid-template-columns: auto auto auto auto auto;
+        /* grid-row-gap: 15px; */
+        margin: auto;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .user-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .user-box {
+        width: 200px;
+        height: 200px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px;
+        cursor: pointer;
+        text-align: center;
+        box-shadow: -1px 1px 10px -1px lightgray;
+        transition: transform 0.3s ease;
+    }
+
+    .transition {
+        transform: translateX(300px);
+        transition: transform 0.5s ease;
+    }
+
+    .user-box:hover {
+        transform: scale(1.05);
+        background-color: #f5f5f5;
+    }
+
+    .user-details {
+        display: none;
+        padding: 10px;
+        border: 1px solid #ddd;
+        margin-top: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .delete-btn {
+        background-color: #f44336;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        padding: 8px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .delete-btn:hover {
+        background-color: #d32f2f;
+    }
+    </style>
+
 </head>
 
 <body>
-    <h1>User Management</h1>
 
     <!-- Display user data in a table -->
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Birthday</th>
-                <th>Gender</th>
-                <th>State</th>
-                <th>City</th>
-                <th>Email</th>
-                <th>Mobile</th>
-                <th>Education</th>
-                <th>Year of Completion</th>
-                <th>Profession</th>
-                <th>Company Name / Business Name</th>
-                <th>Location</th>
-                <!-- Add more columns as needed -->
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?php echo $user['id']; ?></td>
-                <td><?php echo $user['name']; ?></td>
-                <td><?php echo $user['birthday']; ?></td>
-                <td><?php echo $user['gender']; ?></td>
-                <td><?php echo $user['state']; ?></td>
-                <td><?php echo $user['city']; ?></td>
-                <td><?php echo $user['email']; ?></td>
-                <td><?php echo $user['mobile']; ?></td>
-                <td><?php echo $user['education']; ?></td>
-                <td><?php echo $user['yearOfCompletion']; ?></td>
-                <td><?php echo $user['profession']; ?></td>
+    <h1>User Management</h1>
+    <!-- Display user data in a table -->
+    <div class="user-details-container">
+        <?php foreach ($users as $user): ?>
+        <div class="user-box" data-id="<?php echo $user['id']; ?>">
+        <?php echo $user['id']?>
+        
+            <div><?php echo $user['name']; ?></div>
+            <!-- Add more user data as needed -->
+        </div>
+        <?php endforeach; ?>
+        <div><a href="./index.php">Add more Form</a></div>
+    </div>
 
-                <td>
-                    <?php
-    if ($user['profession'] === 'salaried') {
-        echo $user['companyname'];
-    } elseif ($user['profession'] === 'self-employed') {
-        echo $user['businessname'];
-    }
-    ?>
-                </td>
-                <td><?php echo $user['location']; ?></td>
-                <td>
-                    <!-- Edit Button -->
-                    <!-- <a href="./includes/edit_user.php?id=<?php echo $user['ID']; ?>">Edit</a> -->
+    <!-- JavaScript to toggle visibility of user details form -->
+    <script>
+        
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get all user boxes
+        const userBoxes = document.querySelectorAll(".user-box");
 
-                    <!-- Delete Form -->
+        // Add click event listener to each user box
+        userBoxes.forEach(function(userBox) {
+            userBox.addEventListener("click", function() {
+                // Get the ID of the clicked user box
+                const userId = userBox.getAttribute("data-id");
+                // Redirect to form_details.php with the user ID as a query parameter
+                window.location.href = "./form_details.php?id=" + userId;
+            });
+        });
+    });
 
-                    <button class="delete-btn" data-id="<?php echo $user['id']; ?>">Delete</button>
+    $(document).ready(function() {
+        $('.user-box').on('click', function() {
+            $(this).toggleClass('transition');
+        });
+    });
 
-                </td>
-                <!-- Add more columns as needed -->
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    // JavaScript to show/hide user details
+    // const userBoxes = document.querySelectorAll('.user-box');
+    // userBoxes.forEach(userBox => {
+    //     userBox.addEventListener('click', () => {
+    //         const userId = userBox.getAttribute('data-id');
+    //         const userDetails = document.getElementById('user-details-' + userId);
+    //         if (userDetails.style.display === 'none') {
+    //             userDetails.style.display = 'block';
+    //         } else {
+    //             userDetails.style.display = 'none';
+    //         }
+    //     });
+    // });
 
-    <?php
-// Include database connection or necessary files
-// include('./database/db.php');
-
-// Check if ID is provided
-if (isset($_POST['id'])) {
-    // Sanitize and validate the ID
-    $id = $_POST['id'];
-    
-    try {
-        // Prepare SQL statement to delete user
-        $stmt = $conn->prepare("DELETE FROM Users WHERE id = :id");
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-
-        // Check if any rows were affected
-        if ($stmt->rowCount() > 0) {
-            // Send success response to the client
-            echo 'success';
-        } else {
-            // Send error response if no rows were affected
-            echo 'error: No rows deleted';
-        }
-    } catch (PDOException $e) {
-        // Handle database errors
-        echo 'error: ' . $e->getMessage();
-        }
-    } else {
-        // Send error response if ID is not provided
-        echo 'error: ID not provided';
-    }
-?>
-
-
-
+    // JavaScript to handle delete button click
+    const deleteButtons = document.querySelectorAll('.delete-btn');
+    deleteButtons.forEach(deleteButton => {
+        deleteButton.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevent box click event
+            const userId = deleteButton.getAttribute('data-id');
+            // Make AJAX request to delete user with the specified ID
+            // Example AJAX request using Fetch API:
+            fetch('delete_user.php', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        id: userId
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.text())
+                .then(data => {
+                    // Handle response from server
+                    if (data === 'success') {
+                        // User deleted successfully
+                        // Remove the user box from the container
+                        const userBox = document.querySelector('.user-box[data-id="' + userId +
+                            '"]');
+                        if (userBox) {
+                            userBox.remove();
+                        }
+                    } else {
+                        // Error deleting user
+                        console.error('Error: ' + data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    });
+    </script>
 </body>
 
 </html>
