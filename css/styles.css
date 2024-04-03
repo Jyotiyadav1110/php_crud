@@ -1,218 +1,237 @@
+:root {
+  --light-green: #15e38a;
+  --dark-green: #00cd74;
+  --light-white: #ececec;
+  --light-grey: #f9f9f9;
+  --border-color: #ccc;
+  --white: #ffffff;
+  --placeholder-color: #ababab;
+--black: #000000;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--light-white);
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  color: #2e2035;
+  letter-spacing: 1.2px;
+  margin: 0;
+}
+
 .container {
   width: 80%;
-    /* max-width: 1000px; */
-    margin:  auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.5s ease;
-  }
-  
-  .form {
-    animation: slideIn 0.5s ease;
-  }
-  
-  .form label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-    font-weight: bold;
-  }
-  
-  .form input[type="text"],
-  .form input[type="email"],
-  .form input[type="date"],
-  .form select,
-  .form textarea {
-    width: 90%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+  margin: auto;
+  background-color: var(--light-grey);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease;
+}
+
+.form {
+  animation: slideIn 0.5s ease;
+  padding: 40px;
+  box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.55), 10px 10px 15px rgba(70, 70, 70, 0.12);
+}
+
+.form label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: bold;
+}
+
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="date"],
+.form select,
+.form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.from input:focus,
+.form textarea:focus {
+  outline: none;
+}
+
+
+.form input[type="radio"]:focus {
+  outline: none;
+}
+
+.global-btn,
+.form button[type="submit"] {
+  border-radius: 5px;
+  background-color: var(--dark-green);
+  border: 1px solid transparent;
+  cursor: pointer;
+  color: var(--white);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  text-align: center;
+}
+
+.global-btn {
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+.global-btn:hover,
+.form button[type="submit"]:hover {
+  background-color: var(--light-green);
+}
+
+.form button[type="submit"] {
+  padding: 9px 20px;
+  width: 100%;
+  font-size: 18px;
+  line-height: 27px;
+}
+
+input[type="text"],
+input[type="submit"],
+input[type="email"] {
+  border: none;
+  background-color: transparent;
+  padding: 10px;
+  width: 100%;
+  border-radius: 7px;
+  outline: none;
+}
+
+::placeholder {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--placeholder-color);
+  letter-spacing: 1.3px;
+}
+
+input[type="radio"] {
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: relative;
+  height: 25px;
+  width: 25px;
+  border: 5px solid var(--black);
+  border-radius: 50%;
+  font: inherit;
+  outline: none;
+  cursor: pointer;
+}
+
+.radio-input {
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 10px
+}
+
+.inpute-radio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.radio-input label {
+  margin: 0;
+}
+
+input[type="radio"]:checked {
+  background-color: var(--light-green);
+}
+
+.div2,
+.dev2 {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.date {
+  width: 40%;
+}
+
+.div2>div {
+  width: 50%;
+}
+
+.state-city,
+.business-name {
+  flex: 1;
+  width: 100%;
+}
+
+.div4 {
+  display: flex;
+  gap: 20px;
+}
+
+#self_employed_fields {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
 
-  .from input:focus{
-    outline: none;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .form input[type="radio"] {
-    margin-right: 10px;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
   }
-  
-  .form input[type="radio"]:focus{
-    outline: none;
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .form button[type="submit"] {
+}
+
+@media (max-width: 767px) {
+
+  .div2,
+  .dev2,
+  .div4 {
+    flex-direction: column;
+  }
+
+  .div2>div {
     width: 100%;
-    padding: 12px 0;
-    border: none;
-    border-radius: 5px;
-    background-color: #4CAF50;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s;
   }
-  
-  .form button[type="submit"]:hover {
-    background-color: #45a049;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateY(-50px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
 
-  *:before,
-  *:after {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
+  .container {
+    width: calc(100% - 40px);
+  }
+
+  .date {
+    width: 100%;
   }
 
   body {
-      background-color: #ececec;
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: #2e2035;
-      letter-spacing: 1.2px;
+    font-size: 14px;
+    line-height: 21px;
   }
-
-  /* form {
-      width: 100%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 40px 20px;
-      box-shadow: -10px -10px 15px rgba(225, 225, 225, 0.55), 10px 10px 15px rgba(70, 70, 70, 0.12);
-      border-radius: 10px;
-  } */
-
-  .submit {
-      display: block;
-      width: 100%;
-      margin-left: 10%;
-      text-align: center;
-      font: inherit;
-      color: inherit;
-      text-decoration: none;
-      border-radius: 30px;
-      padding: 10px;
-      box-shadow: -10px -10px 15px rgba(225, 225, 225, 0.55), 10px 10px 15px rgba(70, 70, 70, 0.12);
-  }
-
-  input[type="text"],
-  input[type="submit"],
-  input[type="email"] {
-      /* margin: 25px; */
-      border: none;
-      background-color: transparent;
-      box-shadow: -10px -10px 15px rgba(225, 225, 225, 0.55), 10px 10px 15px rgba(70, 70, 70, 0.12);
-      padding: 10px;
-      width: 100%;
-      border-radius: 7px;
-      outline: none;
-  }
-
-  ::placeholder {
-      font-size: 12px;
-      font-weight: 500;
-      color: #ababab;
-      letter-spacing: 1.3px;
-  }
-
-  input[type="radio"] {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      position: relative;
-      height: 40px;
-      width: 35px;
-      box-shadow: -10px -10px 15px rgba(225, 225, 225, 0.55), 10px 10px 15px rgba(70, 70, 70, 0.12);
-      border: 5px solid #ececec;
-      margin-right: 30px;
-      border-radius: 30px;
-      font: inherit;
-      outline: none;
-      cursor: pointer;
-  }
-
-
-  input[type="radio"]::after {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      top: 50%;
-      left: 50%;
-      color: #606060;
-      letter-spacing: 0.5px;
-  }
-
-  #developer:after {
-      content: "Developer";
-  }
-
-  #designer:after {
-      content: "Designer";
-  }
-
-  input[type="radio"]:checked,
-  a:active {
-      box-shadow: -10px -10px 15px 10px rgba(70, 70, 70, 0.12), inset -10px -10px 15px rgba(70, 70, 70, 0.12),
-          inset -10px -10px 15px rgba(225, 225, 225, 0.55), inset 10px 10px 15px rgba(70, 70, 70, 0.12);
-  }
-
-  input[type="radio"]:checked::after {
-      color: #15e38a;
-  }
-
-  /* Pseudo elements for specific labels */
-  input[type="radio"][value="Developer"]::after {
-      content: "Developer";
-  }
-
-  input[type="radio"][value="Designer"]::after {
-      content: "Designer";
-  }
-
-
-  .dev2{
-    display: flex;
-    width: 100%;
-  }
-
-  .date{
-    width: 40%;
-  }
-
-  .state-city, .business-name{
-    width: 100%;
-  }
-  .div4{
-    display: flex;
-  }
-
-  #self_employed_fields{
-    display: flex;
-  }
+}
